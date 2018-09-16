@@ -1,2 +1,2 @@
-# cyclic_learning_rate
+# Cyclic learning rate
 “Cyclical learning rates for training neural networks.”
