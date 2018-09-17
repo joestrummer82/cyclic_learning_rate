@@ -1,7 +1,7 @@
 import tensorflow as tf
 from tensorflow.python.framework import ops
 from tensorflow.python.ops import math_ops
-from tensorflow.python.eager import context
+#
 
 
 def cyclic_learning_rate(global_step,
@@ -11,8 +11,7 @@ def cyclic_learning_rate(global_step,
                          gamma=0.99994,
                          mode='triangular',
                          name=None):
-       """Applies cyclic learning rate (CLR).
-
+    """Applies cyclic learning rate (CLR).
        From the paper:
        Smith, Leslie N. "Cyclical learning
        rates for training neural networks." 2017.
@@ -38,11 +37,11 @@ def cyclic_learning_rate(global_step,
           'triangular':
             Default, linearly increasing then linearly decreasing the
             learning rate at each cycle.
-           'triangular2':
+          'triangular2':
             The same as the triangular policy except the learning
             rate difference is cut in half at the end of each cycle.
             This means the learning rate difference drops after each cycle.
-           'exp_range':
+          'exp_range':
             The learning rate varies between the minimum and maximum
             boundaries and each boundary value declines by an exponential
             factor of: gamma^global_step.
@@ -86,14 +85,7 @@ def cyclic_learning_rate(global_step,
 
         Raises:
           ValueError: if `global_step` is not supplied.
-
-        @compatibility(eager)
-        When eager execution is enabled, this function returns
-        a function which in turn returns the decayed learning
-        rate Tensor. This can be useful for changing the learning
-        rate value across different invocations of optimizer functions.
-        @end_compatibility
-        """
+    """
 
     if global_step is None:
         raise ValueError("global_step is required for cyclic_learning_rate.")
@@ -107,7 +99,7 @@ def cyclic_learning_rate(global_step,
         step_size = math_ops.cast(step_size, dtype)
 
         def cyclic_lr():
-            """Helper to recompute learning rate; most helpful in eager-mode."""
+            """Helper to recompute learning rate."""
 
             # cycle = floor( 1 + global_step / ( 2 * step_size ) )
             double_step = math_ops.multiply(2., step_size)
