@@ -11,16 +11,18 @@ def cyclic_learning_rate(global_step,
                          gamma=0.99994,
                          mode='triangular',
                          name=None):
-    """Applies cyclic learning rate (CLR).
+       """Applies cyclic learning rate (CLR).
+
        From the paper:
        Smith, Leslie N. "Cyclical learning
        rates for training neural networks." 2017.
        [https://arxiv.org/pdf/1506.01186.pdf]
-        This method lets the learning rate cyclically
+
+       This method lets the learning rate cyclically
        vary between reasonable boundary values
        achieving improved classification accuracy and
        often in fewer iterations.
-        This code varies the learning rate linearly between the
+       This code varies the learning rate linearly between the
        minimum (learning_rate) and the maximum (max_lr).
 
         It returns the cyclic learning rate. It is computed as:
@@ -44,7 +46,8 @@ def cyclic_learning_rate(global_step,
             The learning rate varies between the minimum and maximum
             boundaries and each boundary value declines by an exponential
             factor of: gamma^global_step.
-         Example: 'triangular2' mode cyclic learning rate.
+
+        Example: 'triangular2' mode cyclic learning rate.
           '''python
           ...
           global_step = tf.Variable(0, trainable=False)
@@ -60,7 +63,7 @@ def cyclic_learning_rate(global_step,
           ...
            '''
 
-         Args:
+        Args:
           global_step: A scalar `int32` or `int64` `Tensor` or a Python number.
             Global step to use for the cyclic computation.  Must not be negative.
           learning_rate: A scalar `float32` or `float64` `Tensor` or a
@@ -76,9 +79,11 @@ def cyclic_learning_rate(global_step,
               Values correspond to policies detailed above.
           name: String.  Optional name of the operation.  Defaults to
             'CyclicLearningRate'.
-         Returns:
+
+        Returns:
           A scalar `Tensor` of the same type as `learning_rate`.  The cyclic
           learning rate.
+
         Raises:
           ValueError: if `global_step` is not supplied.
 
@@ -88,7 +93,7 @@ def cyclic_learning_rate(global_step,
         rate Tensor. This can be useful for changing the learning
         rate value across different invocations of optimizer functions.
         @end_compatibility
-    """
+        """
 
     if global_step is None:
         raise ValueError("global_step is required for cyclic_learning_rate.")
